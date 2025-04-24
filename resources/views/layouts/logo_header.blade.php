@@ -1,8 +1,10 @@
 <div class="logo-header" data-background-color="blue">
 
-    <a href="index.html" class="logo">
+    {{-- <a href="index.html" class="logo">
         <img src="{{asset('assets.dashboard') }}/assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
-    </a>
+    </a> --}}
+
+    <h4>Kingnet Admin Panel</h4>
     <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon">
             <i class="icon-menu"></i>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('price');
             $table->string('cycle');
+            $table->enum('type', ['pppoe', 'hotspot'])->default('pppoe');
             $table->string('bandwidth')->nullable();
             $table->enum('status', ['available', 'unavailable'])->default('available');
             $table->timestamps();
