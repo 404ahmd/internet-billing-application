@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('username')->unique();
-            $table->string('package');
+            $table->string('paket');
             $table->string('address');
             $table->string('group')->nullable();
-            $table->string('phone');
+            $table->string('phone', 20);
             $table->date('join_date');
             $table->enum('status', ['active', 'inactive', 'terminated'])->default('active');
             $table->date('last_payment_date')->nullable();

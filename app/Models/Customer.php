@@ -14,10 +14,12 @@ class Customer extends Model
         'last_payment_date', 'due_date', 'notes'
     ];
 
+    // function so that the invoice table can have a foreign key that refers to the customer id
     public function invoices(){
         return $this->hasMany(Invoice::class);
     }
 
+    // function so that the transaction table can have a foreign key that refers to the customer id
     public function transactions(){
         return $this->hasMany(Transaction::class);
     }

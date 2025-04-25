@@ -22,6 +22,7 @@ return new class extends Migration
             $table->decimal('tax_amount', 10, 2)->default(0);
             $table->decimal('total_amount', 10, 2);
             $table->enum('status', ['paid', 'unpaid', 'overdue'])->default('unpaid');
+            $table->timestamp('paid_at')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
         });

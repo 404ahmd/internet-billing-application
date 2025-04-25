@@ -10,9 +10,9 @@ class Invoice extends Model
     use HasFactory;
 
     protected $fillable = [
-        'customer_id', 'product_id', 'invoice_number',
+        'customer_id', 'package_id', 'invoice_number',
         'issue_date', 'due_date', 'amount', 'tax_amount',
-        'total_amount', 'status', 'notes'
+        'total_amount', 'paid_at','status', 'notes'
     ];
 
     public function customer()
@@ -20,9 +20,9 @@ class Invoice extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function product()
+    public function package()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Package::class);
     }
 
     public function transactions()

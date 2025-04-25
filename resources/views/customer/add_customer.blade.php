@@ -20,7 +20,9 @@
             @endif
             <div class="row">
                 <div class="col-12 col-md-6">
-                    <h4 class="text-center">Tambah customer</h4>
+
+                    {{-- FORM ADD NEW CUSTOMER --}}
+                    <h4 class="text-center">Tambah Pelanggan</h4>
                     <hr>
                     <form method="POST" action="{{ route('customer.store') }}">
                         @csrf
@@ -35,41 +37,51 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="phone" class="form-label">Phone</label>
+                            <label for="phone" class="form-label">Telpon</label>
                             <input type="text" id="phone" name="phone" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
+                            <label for="address" class="form-label">Alamat</label>
                             <input type="text" id="address" name="address" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="group" class="form-label">Group</label>
+                            <label for="group" class="form-label">Grup</label>
                             <input type="text" id="group" name="group" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="package" class="form-label">Package</label>
-                            <input type="text" id="package" name="package" class="form-control" required>
+                            <label for="package" class="form-label">Paket</label>
+                            <select name="package" id="package" class="form-control-sm w-100">
+                                {{-- SHOW ALL AVAILABLE PACAKGE --}}
+                                <option value="">-- Pilih Paket --</option>
+                                @forelse($packages as $index => $package)
+                                <option value="{{ $package->id }}">{{ $package->name }}</option>
+
+                                @empty
+
+                                @endforelse
+                            </select>
+
                         </div>
 
                         <div class="mb-3">
-                            <label for="join_date" class="form-label">Join Date</label>
+                            <label for="join_date" class="form-label">Tanggal Berlangganan</label>
                             <input type="date" id="join_date" name="join_date" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
                             <select name="status" id="status" class="form-control" required>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                                <option value="terminated">Terminated</option>
+                                <option value="active">Aktif</option>
+                                <option value="inactive">Tidak Aktif</option>
+                                <option value="terminated">Dihentikan</option>
                             </select>
                         </div>
 
                         <div class="mb-3">
-                            <label for="notes" class="form-label">Notes</label>
+                            <label for="notes" class="form-label">Catatan</label>
                             <input type="text" id="notes" name="notes" class="form-control" required>
                         </div>
 
@@ -79,7 +91,7 @@
             </div>
         </div>
 
-    {{-- @include('layouts.footer') --}}
+        @include('layouts.footer')
 
-</div>
-@endsection
+    </div>
+    @endsection

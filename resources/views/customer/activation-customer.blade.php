@@ -1,0 +1,109 @@
+@extends('layouts.master')
+@section('content')
+
+<div class="main-panel">
+    <div class="content">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Form Aktivasi Pelanggan</h4>
+            </div>
+            <div class="card-body">
+
+                @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+
+                @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+
+
+                <form action="{{ route('customer.activation.store') }}" method="POST">
+                    @csrf
+
+                    <div class="mb-4">
+                        <label for="customer_id" class="form-label">Pilih Pelanggan</label>
+                        <select name="customer_id" id="customer_id" class="form-select" required>
+                            @foreach($customers as $customer)
+                                <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="package_id" class="form-label">Pilih Paket</label>
+                        <select name="package_id" id="package_id" class="form-select" required>
+                            @foreach($packages as $package)
+                                <option value="{{ $package->id }}">{{ $package->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="invoice_number" class="form-label">Nomor Invoice</label>
+                        <input type="text" class="form-control" id="invoice_number" name="invoice_number" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="issue_date" class="form-label">Tanggal Penerbitan</label>
+                        <input type="date" class="form-control" id="issue_date" name="issue_date" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="due_date" class="form-label">Tanggal Jatuh Tempo</label>
+                        <input type="date" class="form-control" id="due_date" name="due_date" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="amount" class="form-label">Jumlah</label>
+                        <input type="number" step="0.01" class="form-control" id="amount" name="amount" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="tax_amount" class="form-label">Jumlah Pajak</label>
+                        <input type="number" step="0.01" class="form-control" id="tax_amount" name="tax_amount" value="0">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="total_amount" class="form-label">Jumlah Total</label>
+                        <input type="number" step="0.01" class="form-control" id="total_amount" name="total_amount" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="status" class="form-label">Status Pembayaran</label>
+                        <select name="status" id="status" class="form-select" required>
+                            <option value="paid">Lunas</option>
+                            <option value="unpaid" selected>Belum Lunas</option>
+                            <option value="overdue">Terlambat</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="paid_at" class="form-label">Tanggal Pembayaran</label>
+                        <input type="datetime-local" class="form-control" id="paid_at" name="paid_at">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="notes" class="form-label">Catatan</label>
+                        <textarea name="notes" id="notes" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">Kirim</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@include('layouts.footer')
+@endsection

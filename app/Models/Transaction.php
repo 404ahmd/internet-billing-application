@@ -14,11 +14,13 @@ class Transaction extends Model
         'payment_date', 'payment_method', 'reference', 'notes'
     ];
 
+    // function so that transactions table can have foreign key to invoice id
     public function invoice()
     {
         return $this->belongsTo(Invoice::class);
     }
 
+     // function so that transactions table can have foreign key to customer id
     public function customer()
     {
         return $this->belongsTo(Customer::class);

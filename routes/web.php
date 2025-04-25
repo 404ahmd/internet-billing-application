@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\ActivationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +18,10 @@ Route::get('/customer/add/view', [CustomerController::class, 'addCustomerView'])
 Route::post('/customer/store', [CustomerController::class, 'store'])->name('customer.store');
 Route::delete('/customer/destroy/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
 
-Route::get('/products/view', [ProductController::class, 'index'])->name('products.view');
+Route::get('/pacakge/view', [PackageController::class, 'index'])->name('package.view');
+Route::post('/package/store', [PackageController::class, 'store'])->name('package.store');
+
+Route::get('/customer/activation', [ActivationController::class, 'index'])->name('customer.activation');
+Route::post('/customer/activation/store', [ActivationController::class, 'store'])->name('customer.activation.store');
+
+Route::get('/invoice/view', [InvoiceController::class, 'index'])->name('invoice.view');
