@@ -4,6 +4,7 @@
 <div class="main-panel">
     <div class="content">
         <div class="card-body">
+            <h4>Daftar Pelanggan</h4>
             @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -21,19 +22,19 @@
                 <table class="table table-bordered table-hover shadow-sm" style="min-width: 900px;">
                     <thead class="table-light">
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
+                            <th>No</th>
+                            <th>Nama</th>
                             <th>Username</th>
-                            <th>Phone</th>
-                            <th>Address</th>
-                            <th>Package</th>
-                            <th>group</th>
-                            <th>join_date</th>
-                            <th>status</th>
-                            <th>last_payment_date</th>
-                            <th>due_date</th>
-                            <th>notes</th>
-                            <th>Actions</th>
+                            <th>Telpon</th>
+                            <th>Alamat</th>
+                            <th>Paket</th>
+                            <th>Grup</th>
+                            <th>Tanggal Daftar</th>
+                            <th>Status</th>
+                            <th>Pembayaran Terbaru</th>
+                            <th>Berlaku Sampai</th>
+                            <th>Catatan</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,8 +49,8 @@
                             <td>{{ $customer->group }}</td>
                             <td>{{ $customer->join_date }}</td>
                             <td>{{ $customer->status }}</td>
-                            <td>{{ $customer->last_payment_date }}</td>
-                            <td>{{ $customer->due_date }}</td>
+                            <td>{{ $customer->lastInvoices?->paid_at }}</td>
+                            <td>{{ $customer->getDuedate?->due_date }}</td>
                             <td>{{ $customer->notes }}</td>
                             <td>
                                 <a href="#" class="btn btn-sm btn-warning">Edit</a>

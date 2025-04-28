@@ -13,7 +13,7 @@ class CustomerController extends Controller
     //function for get customer table view
     public function index()
     {
-        $customers = Customer::all();
+        $customers = Customer::with(['lastInvoices', 'getDueDate'])->get();
         return view('customer.list_customer', compact('customers'));
     }
 

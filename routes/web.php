@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,3 +26,5 @@ Route::get('/customer/activation', [ActivationController::class, 'index'])->name
 Route::post('/customer/activation/store', [ActivationController::class, 'store'])->name('customer.activation.store');
 
 Route::get('/invoice/view', [InvoiceController::class, 'index'])->name('invoice.view');
+
+Route::get('/customer/transactions', [TransactionsController::class, 'index'])->name('customer.transactions');

@@ -120,6 +120,11 @@
                                         <span class="sub-item">Lihat Invoice</span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('customer.transactions') }}">
+                                        <span class="sub-item">Riwayat Transaksi</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>

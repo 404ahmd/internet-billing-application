@@ -10,8 +10,7 @@ class Customer extends Model
     use HasFactory;
     protected $fillable = [
        'name', 'username', 'phone', 'address',
-        'package', 'group', 'join_date', 'status',
-        'last_payment_date', 'due_date', 'notes'
+        'package', 'group', 'join_date', 'status', 'due_date', 'notes'
     ];
 
     // function so that the invoice table can have a foreign key that refers to the customer id
@@ -22,5 +21,13 @@ class Customer extends Model
     // function so that the transaction table can have a foreign key that refers to the customer id
     public function transactions(){
         return $this->hasMany(Transaction::class);
+    }
+
+    public function lastInvoices(){
+        return $this->hasOne(Invoice::class)->latestOfMany('paid_at');
+    }
+
+    public function getDueDate(){
+        return $this->hasOne(Invoice::class)->latestOfMany('due_date');
     }
 }

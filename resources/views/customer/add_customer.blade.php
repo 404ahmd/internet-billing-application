@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="join_date" class="form-label">Tanggal Berlangganan</label>
+                            <label for="join_date" class="form-label">Tanggal Pendaftaran</label>
                             <input type="date" id="join_date" name="join_date" class="form-control" required>
                         </div>
 

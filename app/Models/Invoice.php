@@ -29,4 +29,20 @@ class Invoice extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    protected static function booted(){
+        static::updated(function($invoice){
+            if($invoice->isDirty('status') && $invoice->status === 'paid'){
+                Transaction::create([
+                    'invoice_id'=>$invoice->id,
+                    'customer_id'=>$invoice->customer_id,
+                    'amount'=>$invoice->amount,
+                    'payment_date'=>$invoice->paid_at,
+                    'payment_method' => "Cash",
+                    'reference' => "-",
+                    'notes' => "-"
+                ]);
+            }
+        });
+    }
 }
