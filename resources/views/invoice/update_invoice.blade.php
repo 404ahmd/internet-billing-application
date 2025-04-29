@@ -7,26 +7,37 @@
 
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h3>Edit Invoice #{{ $invoice->invoice_number }}</h3>
+                    <h3>Edit Invoice #{{ $invoice->customer->name }}</h3>
                 </div>
 
                 <div class="card-body">
+                    @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
+
+                    @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
                     <form action="{{ route('invoices.update', $invoice->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
                         <div class="row mb-3">
                             <div class="col-md-6">
-
-                                <label for="customer_id" class="form-label">{{ $invoice->customer->name }}</label>
-                                {{-- <select name="customer_id" id="customer_id" class="form-select" required>
+                                <select name="customer_id" id="customer_id" class="form-select" required>
                                     @foreach($customers as $customer)
                                     <option value="{{ $customer->id }}" {{ $invoice->customer_id == $customer->id ?
                                         'selected' : '' }}>
                                         {{ $customer->name }} ({{ $customer->username }})
                                     </option>
                                     @endforeach
-                                </select> --}}
+                                </select>
                             </div>
 
                             <div class="col-md-6">
@@ -98,7 +109,7 @@
                             <div class="col-md-6" id="paid_at_container">
                                 <label for="paid_at" class="form-label">Payment Date</label>
                                 <input type="datetime-local" class="form-control" id="paid_at" name="paid_at"
-                                    value="{{ $invoice->paid_at }}">
+                                    value="{{ $invoice->paid_at ? $invoice->paid_at->format('Y-m-d\TH:i') : ''}}">
                             </div>
                         </div>
 

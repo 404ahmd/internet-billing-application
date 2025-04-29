@@ -14,16 +14,24 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoices = Invoice::all();
-        return view('invoice.invoice_customer', compact('invoices'));
+        return view('invoice.invoice_customer', [
+            'invoices' => $invoices,
+        ]);
     }
 
-    public function search(Request $request)
-    {
+    public function search(Request $request){
         $request->validate([
-            'customer_name'=>'required|string|min:3'
+            'keyword' => 'string|max:255'
         ]);
 
-        
+        $keyword = $request->keyword;
+        $invoices = Invoice::whereHas('customer', function ($query) use ($keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        })->with('customer', 'package')->get();
+        return view('invoice.invoice_customer', [
+            'invoices' => $invoices,
+
+        ]);
     }
 
     //get form invoice update
@@ -44,14 +52,14 @@ class InvoiceController extends Controller
         $validated = $request->validate([
             'customer_id' => 'required|exists:customers,id',
             'package_id' => 'required|exists:packages,id',
-            'invoice_number' => 'required|unique:invoices,invoice_number,',
+            'invoice_number' => 'required|unique:invoices,invoice_number,' . $invoice->id,
             'issue_date' => 'required|date',
             'due_date' => 'required|date|after_or_equal:issue_date',
             'amount' => 'required|numeric|min:0',
             'tax_amount' => 'nullable|numeric|min:0',
             'total_amount' => 'required|numeric|min:0',
             'status' => 'required|in:paid,unpaid,overdue',
-            'paid_at' => $request->status == 'paid' ? 'required|date' : 'nullable|date',
+            'paid_at' => 'nullable|date', //$request->status == 'paid' ? 'required|date' :
             'notes' => 'nullable|string',
         ]);
 

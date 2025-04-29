@@ -5,12 +5,25 @@
 <div class="main-panel">
     <div class="content">
         <div class="card-body">
+            @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
+            @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <h4>Daftar Invoice</h4>
 
-            <form method="GET" action="#"
+            <form method="GET" action="{{ route('invoices.search') }}"
                 class="d-flex align-items-center gap-2 bg-light rounded px-2 py-1 ms-lg-3 mt-2 mt-lg-0 shadow-sm">
-                <input class="form-control form-control-sm border-0 bg-transparent" type="search" name="search"
-                    placeholder="🔍 Cari id/nama pelanggan..." value="{{ request('search') }}" aria-label="Search">
+                <input class="form-control form-control-sm border-0 bg-transparent" type="search" name="keyword"
+                    placeholder="🔍 Cari id/nama pelanggan..." value="{{ request('keyword') }}" aria-label="Search">
                 <button type="submit" class="btn btn-sm btn-primary ms-auto">Cari</button>
             </form>
             <div class="table-responsive" style="max-height: 600px">

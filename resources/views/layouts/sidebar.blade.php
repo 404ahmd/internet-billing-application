@@ -111,17 +111,12 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
-                                        <span class="sub-item">Riwayat Transaksi</span>
-                                    </a>
-                                </li>
-                                <li>
                                     <a href="{{ route('invoice.view') }}">
                                         <span class="sub-item">Lihat Invoice</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('customer.transactions') }}">
+                                    <a href="{{ route('transaction.view') }}">
                                         <span class="sub-item">Riwayat Transaksi</span>
                                     </a>
                                 </li>

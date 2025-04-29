@@ -18,6 +18,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
+            <form method="GET" action="{{ route('customer.search') }}"
+            class="d-flex align-items-center gap-2 bg-light rounded px-2 py-1 ms-lg-3 mt-2 mt-lg-0 shadow-sm">
+            <input class="form-control form-control-sm border-0 bg-transparent" type="search" name="keyword"
+                placeholder="🔍 Cari id/nama pelanggan..." value="{{ request('keyword') }}" aria-label="Search">
+            <button type="submit" class="btn btn-sm btn-primary ms-auto">Cari</button>
+        </form>
             <div class="table-responsive" style="max-height: 600px;">
                 <table class="table table-bordered table-hover shadow-sm" style="min-width: 900px;">
                     <thead class="table-light">
@@ -31,8 +37,7 @@
                             <th>Grup</th>
                             <th>Tanggal Daftar</th>
                             <th>Status</th>
-                            <th>Pembayaran Terbaru</th>
-                            <th>Berlaku Sampai</th>
+                            <th>Tanggal Jatuh Tempo</th>
                             <th>Catatan</th>
                             <th>Aksi</th>
                         </tr>
@@ -49,11 +54,10 @@
                             <td>{{ $customer->group }}</td>
                             <td>{{ $customer->join_date }}</td>
                             <td>{{ $customer->status }}</td>
-                            <td>{{ $customer->lastInvoices?->paid_at }}</td>
-                            <td>{{ $customer->getDuedate?->due_date }}</td>
+                            <td>{{ $customer->due_date }}</td>
                             <td>{{ $customer->notes }}</td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-warning">Edit</a>
+                                <a href="{{ route('customer.edit', $customer->id)  }}" class="btn btn-sm btn-warning">Edit</a>
                                 <form action="{{ route('customer.destroy', $customer->id) }}" method="POST"
                                     onsubmit="return confirm('Yakin ingin hapus?')" class="d-inline">
                                     @csrf

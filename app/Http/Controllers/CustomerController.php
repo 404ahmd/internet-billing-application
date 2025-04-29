@@ -3,18 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Invoice;
 use App\Models\Package;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
     //function for get customer table view
     public function index()
     {
-        $customers = Customer::with(['lastInvoices', 'getDueDate'])->get();
-        return view('customer.list_customer', compact('customers'));
+        $customers = Customer::all();
+        $invoices = Invoice::all();
+        return view('customer.list_customer', [
+            'invoices' => $invoices,
+            'customers' => $customers
+        ]);
     }
 
     //function for get form add cutomer
@@ -73,5 +79,47 @@ class CustomerController extends Controller
         //redirec with success message
         $customer_id->delete();
         return redirect()->back()->with('success', 'data berhasil dihapus');
+    }
+
+    public function edit(Customer $customer)
+    {
+        $packages = Package::all();
+        return view('customer.edit_customer', [
+            'customer' => $customer,
+            'packages' => $packages
+        ]);
+    }
+
+    public function update(Request $request, Customer $customer)
+    {
+        $validated = $request->validate([
+            'name' => 'required|exists:customers,name',
+            'username' => 'required|exists:customers,username',
+            'phone' => 'required|numeric|min:0',
+            'address' => 'required',
+            'package' => 'required',
+            'group' => 'required',
+            'join_date' => 'required',
+            'status' => 'required',
+            'due_date' => 'required',
+            'notes' => 'nullable|string'
+        ]);
+
+        try {
+            $customer->update($validated);
+            return redirect()->route('customer.view')->with('succes', 'data berhasil dipernarui');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'data gagal diperbarui' . $e->getMessage())->withInput();
+        }
+    }
+
+    public function search(Request $request){
+        $request->validate([
+            'keyword' => 'string|max:255'
+        ]);
+
+        $keyword = $request->keyword;
+        $customers = DB::table('customers')->where('name', 'like', '%'. $keyword .'%')->paginate();
+        return view('customer.list_customer', compact('customers'));
     }
 }
