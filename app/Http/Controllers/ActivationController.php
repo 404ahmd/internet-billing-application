@@ -18,7 +18,7 @@ class ActivationController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'customer_id' => 'required|exists:customers,id',
             'package_id' => 'required|exists:packages,id',
             'invoice_number' => 'required|unique:invoices',
@@ -33,26 +33,15 @@ class ActivationController extends Controller
         ]);
 
         try {
-            Invoice::create([
-                'customer_id' => $request->customer_id,
-                'package_id' => $request->package_id,
-                'invoice_number' => $request->invoice_number,
-                'issue_date' => $request->issue_date,
-                'due_date' => $request->due_date,
-                'amount' => $request->amount,
-                'tax_amount' => $request->tax_amount,
-                'total_amount' => $request->total_amount,
-                'status' => $request->status,
-                'paid_at' => $request->paid_at,
-                'notes' => $request->notes
-            ]);
+            if ($validated['status'] == 'paid' && empty($validated['paid_at'])) {
+                $validated['paid_at'] = now();
+            }
+
+            Invoice::create($validated);
 
             return redirect()->back()->with('success', 'Berhasil diaktivasi');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal menyimpan invoice: ' . $e->getMessage())->withInput();
-
         }
-
-
     }
 }

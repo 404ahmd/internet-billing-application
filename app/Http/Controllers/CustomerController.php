@@ -18,7 +18,8 @@ class CustomerController extends Controller
     }
 
     //function for get form add cutomer
-    public function addCustomerview(){
+    public function addCustomerview()
+    {
         $packages = Package::all();
         return view('customer.add_customer', compact('packages'));
     }
@@ -27,7 +28,8 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         // validation in form
-        $request->validate([
+
+        $validated = $request->validate([
             'name' => 'required',
             'username' => 'required|unique:customers,username',
             'phone' => 'required|digits_between:10,15',
@@ -39,35 +41,18 @@ class CustomerController extends Controller
             'notes' => 'required'
         ]);
 
-        //check if customer name and username is existing
-        //return back to form and throw a error message
-        $existing = Customer::where('name', $request->name)->orWhere('username', $request->username)->first();
-        if ($existing) {
-            return back()->with('error', 'name atau username sudah digunakan');
+        try {
+            Customer::create($validated);
+            return redirect()->back()->with('success', 'data berhasil ditambahkan');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'gagal menyimpan data' . $e->getMessage())->withInput();
         }
-
-        //store data from add customer form to customer table
-        Customer::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'package' => $request->package,
-            'group' => $request->group,
-            'join_date' => $request->join_date,
-            'status' => $request->status,
-            'last_payment_date' => Carbon::now()->toDateString(),
-            'due_date' => Carbon::now()->addDays(30)->toDateString(),
-
-            'notes' => $request->notes
-        ]);
-
         //while success, redirect to form and throwing success message
-        return redirect()->back()->with('success', 'data berhasil ditambahkan');
     }
 
     //function for get all customer
-    public function get(){
+    public function get()
+    {
         $customers = Customer::all();
         //retun back to table customer view and show all customer data
         return view('customer.list_customer', compact('customers'));
@@ -75,7 +60,8 @@ class CustomerController extends Controller
 
     //function for delete customer by id
     //this function is aplied in delete button
-    public function destroy($id){
+    public function destroy($id)
+    {
         $customer_id = Customer::findOrFail($id);
         //check if customer id is empty or cant found
         //redirect back to table and show error message

@@ -26,5 +26,8 @@ Route::get('/customer/activation', [ActivationController::class, 'index'])->name
 Route::post('/customer/activation/store', [ActivationController::class, 'store'])->name('customer.activation.store');
 
 Route::get('/invoice/view', [InvoiceController::class, 'index'])->name('invoice.view');
+Route::get('/invoices/{invoice}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit');
+Route::put('/invoices/{invoice}', [InvoiceController::class, 'update'])->name('invoices.update');
+Route::get('/invoices/search', [InvoiceController::class, 'search'])->name('invoice.search');
 
 Route::get('/customer/transactions', [TransactionsController::class, 'index'])->name('customer.transactions');
