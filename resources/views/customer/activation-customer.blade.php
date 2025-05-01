@@ -44,10 +44,10 @@
                             </select>
                         </div>
 
-                        <div class="mb-4">
+                        {{-- <div class="mb-4">
                             <label for="invoice_number" class="form-label">Nomor Invoice</label>
                             <input type="text" class="form-control" id="invoice_number" name="invoice_number" required>
-                        </div>
+                        </div> --}}
 
                         <div class="mb-4">
                             <label for="issue_date" class="form-label">Tanggal Penerbitan</label>

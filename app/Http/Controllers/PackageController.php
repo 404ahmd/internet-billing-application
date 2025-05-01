@@ -52,4 +52,43 @@ class PackageController extends Controller
         // return back if success and show the message
         return redirect()->back()->with('success', 'paket berhasil ditambahkan');
     }
+
+    public function edit($id){
+        $packages = Package::findOrFail($id);
+        return view('package.package_edit', [
+            'packages' => $packages,
+        ]);
+    }
+
+    public function update(Request $request, $id){
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'type' => 'required',
+            'cycle' => 'required',
+            'bandwidth' => 'required',
+            'status' => 'required'
+        ]);
+
+        try {
+            $pacakge = Package::findOrFail($id);
+            $pacakge->update($validated);
+            return redirect()->route('package.view')->with('success', 'paket berhasil diperbarui');
+
+        } catch (\Exception $e) {
+            return back()->with('error', 'gagal memperbarui paket' . $e->getMessage())->withInput();
+        }
+    }
+
+    public function destroy($id){
+        $id_package = Package::findOrFail($id);
+
+        if(!$id_package){
+            return redirect()->back()->with('error', 'data gagal dihapus');
+        }
+
+        $id_package->delete();
+        return redirect() -> route('package.view')->with('success', 'data berhasil dihapus');
+    }
 }

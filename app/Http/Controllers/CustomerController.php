@@ -81,8 +81,9 @@ class CustomerController extends Controller
         return redirect()->back()->with('success', 'data berhasil dihapus');
     }
 
-    public function edit(Customer $customer)
+    public function edit($id)
     {
+        $customer = Customer::findOrFail($id);
         $packages = Package::all();
         return view('customer.edit_customer', [
             'customer' => $customer,
@@ -90,36 +91,63 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function update(Request $request, Customer $customer)
+    // public function update(Request $request, $id)
+    // {
+    //     $validated = $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'package' => 'required',
+    //         'username' => 'required|string|max:255',
+    //         'phone' => 'required|numeric|min:0',
+    //         'address' => 'required',
+    //         'group' => 'required',
+    //         'join_date' => 'required',
+    //         'status' => 'required|in:active,inactive,terminated',
+    //         'due_date' => 'required',
+    //         'notes' => 'nullable|string'
+    //     ]);
+
+    //     try {
+    //         $customer = Customer::findOrFail($id);
+    //         $customer->update($validated);
+    //         return redirect()->route('customer.view')->with('success', 'data berhasil dipernarui');
+    //     } catch (\Exception $e) {
+    //         return redirect()->back()->with('error', 'data gagal diperbarui' . $e->getMessage())->withInput();
+    //     }
+    // }
+
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'required|exists:customers,name',
-            'username' => 'required|exists:customers,username',
-            'phone' => 'required|numeric|min:0',
-            'address' => 'required',
-            'package' => 'required',
-            'group' => 'required',
-            'join_date' => 'required',
-            'status' => 'required',
-            'due_date' => 'required',
-            'notes' => 'nullable|string'
+            'name'       => 'required|string|max:255',
+            'username'   => 'required|string|max:255|unique:customers,username,' . $id,
+            'phone'      => 'required|numeric|min:0',
+            'address'    => 'required|string',
+            'package'    => 'required|string',
+            'group'      => 'required|string',
+            'join_date'  => 'required|date',
+            'status'     => 'required|in:active,inactive,terminated',
+            'due_date'   => 'required|date',
+            'notes'      => 'nullable|string'
         ]);
 
         try {
+            $customer = Customer::findOrFail($id);
             $customer->update($validated);
-            return redirect()->route('customer.view')->with('succes', 'data berhasil dipernarui');
+
+            return redirect()->route('customer.view')->with('success', 'Data berhasil diperbarui.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'data gagal diperbarui' . $e->getMessage())->withInput();
+            return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage())->withInput();
         }
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $request->validate([
             'keyword' => 'string|max:255'
         ]);
 
         $keyword = $request->keyword;
-        $customers = DB::table('customers')->where('name', 'like', '%'. $keyword .'%')->paginate();
+        $customers = DB::table('customers')->where('name', 'like', '%' . $keyword . '%')->paginate();
         return view('customer.list_customer', compact('customers'));
     }
 }

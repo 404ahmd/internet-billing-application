@@ -1,131 +1,115 @@
-<!-- Tambahkan ini di <style> atau file CSS kamu -->
-    <style>
-        .sidebar .nav .nav-item a p,
-        .sidebar .nav .nav-item a span,
-        .sidebar .nav .nav-item i {
-            font-size: 16px !important; /* Atur ukuran teks lebih besar */
-        }
-    </style>
+<!-- Sidebar -->
+<div class="sidebar sidebar-style-2">
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <ul class="nav nav-primary">
 
-    <!-- Sidebar -->
-    <div class="sidebar sidebar-style-2">
-        <div class="sidebar-wrapper scrollbar scrollbar-inner">
-            <div class="sidebar-content">
-                <ul class="nav nav-primary">
+                <!-- ================== Pelanggan ================== -->
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon"><i class="fas fa-users"></i></span>
+                    <h4 class="text-section">Pelanggan</h4>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('add.customer.view') }}">
+                        <i class="fas fa-user-plus"></i>
+                        <p>Tambah Pelanggan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('customer.view') }}">
+                        <i class="fas fa-address-book"></i>
+                        <p>Daftar Pelanggan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('customer.activation') }}">
+                        <i class="fas fa-check-circle"></i>
+                        <p>Aktivasi Pelanggan</p>
+                    </a>
+                </li>
 
-                    <!-- Customer Menu -->
-                    <li class="nav-item">
-                        <a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
-                            <i class="fas fa-home"></i>
-                            <p>Layanan</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse" id="dashboard">
-                            <ul class="nav nav-collapse">
-                                <li>
-                                    <a href="{{ route('add.customer.view') }}">
-                                        <span class="sub-item">Tambah Pelanggan</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('customer.view') }}">
-                                        <span class="sub-item">Daftar Pelanggan</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('customer.activation') }}">
-                                        <span class="sub-item">Aktivasi Pelanggan</span>
-                                    </a>
-                                </li>
+                <hr>
 
-                            </ul>
-                        </div>
-                    </li>
+                <!-- ================== Jaringan ================== -->
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon"><i class="fas fa-network-wired"></i></span>
+                    <h4 class="text-section">Jaringan</h4>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fas fa-server"></i>
+                        <p>Router</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fas fa-project-diagram"></i>
+                        <p>IP Pool</p>
+                    </a>
+                </li>
 
-                    <!-- Internet Menu -->
-                    <li class="nav-item">
-                        <a data-toggle="collapse" href="#internetMenu" class="collapsed" aria-expanded="false">
-                            <i class="fas fa-network-wired"></i>
-                            <p>Jaringan</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse" id="internetMenu">
-                            <ul class="nav nav-collapse">
-                                <li>
-                                    <a href="#">
-                                        <span class="sub-item">Router</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="sub-item">IP Pool</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                <hr>
 
-                    <!-- Paket Menu: Diubah jadi langsung link -->
-                    <li class="nav-item">
-                        <a href="{{ route('package.view') }}">
-                            <i class="fas fa-cogs"></i>
-                            <p>Manajemen Paket</p>
-                        </a>
-                    </li>
+                <!-- ================== Paket ================== -->
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon"><i class="fas fa-box"></i></span>
+                    <h4 class="text-section">Paket</h4>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('package.view') }}">
+                        <i class="fas fa-cogs"></i>
+                        <p>Manajemen Paket</p>
+                    </a>
+                </li>
 
-                    <!-- Pemberitahuan Menu -->
-                    <li class="nav-item">
-                        <a data-toggle="collapse" href="#pemberitahuanMenu" class="collapsed" aria-expanded="false">
-                            <i class="fas fa-bell"></i>
-                            <p>Kirim Pesan</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse" id="pemberitahuanMenu">
-                            <ul class="nav nav-collapse">
-                                <li>
-                                    <a href="#">
-                                        <span class="sub-item">Satu Pelanggan</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="sub-item">Banyak Pelanggan</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                <hr>
 
-                    <!-- Laporan Menu -->
-                    <li class="nav-item">
-                        <a data-toggle="collapse" href="#laporanMenu" class="collapsed" aria-expanded="false">
-                            <i class="fas fa-bell"></i>
-                            <p>Laporan</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse" id="laporanMenu">
-                            <ul class="nav nav-collapse">
-                                <li>
-                                    <a href="#">
-                                        <span class="sub-item">Laporan Harian</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('invoice.view') }}">
-                                        <span class="sub-item">Lihat Invoice</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('transaction.view') }}">
-                                        <span class="sub-item">Riwayat Transaksi</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                <!-- ================== Kirim Pesan ================== -->
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon"><i class="fas fa-paper-plane"></i></span>
+                    <h4 class="text-section">Kirim Pesan</h4>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fas fa-comment-dots"></i>
+                        <p>Satu Pelanggan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fas fa-comments"></i>
+                        <p>Banyak Pelanggan</p>
+                    </a>
+                </li>
 
-                </ul>
-            </div>
+                <hr>
+
+                <!-- ================== Laporan ================== -->
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon"><i class="fas fa-chart-line"></i></span>
+                    <h4 class="text-section">Laporan</h4>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fas fa-calendar-day"></i>
+                        <p>Laporan Harian</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('invoice.view') }}">
+                        <i class="fas fa-file-invoice"></i>
+                        <p>Lihat Invoice</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('transaction.view') }}">
+                        <i class="fas fa-history"></i>
+                        <p>Riwayat Transaksi</p>
+                    </a>
+                </li>
+
+            </ul>
         </div>
     </div>
-    <!-- End Sidebar -->
+</div>
+<!-- End Sidebar -->

@@ -109,8 +109,8 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                                            <form action="#" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus produk ini?');">
+                                            <a href="{{ route('package.edit', $package->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                            <form action="{{ route('package.destroy', $package->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus produk ini?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-sm btn-danger">Hapus</button>
