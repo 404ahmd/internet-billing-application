@@ -26,7 +26,7 @@ class DummyCustomerSeeder extends Seeder
                 'group' => $currentMonth,
                 'package' => 1,
                 'join_date' => $today,
-                'status' => 'active',
+                'status' => 'inactive',
                 'notes' => 'Pelanggan baru, paket basic.',
             ],
             [
@@ -37,7 +37,7 @@ class DummyCustomerSeeder extends Seeder
                 'group' => $currentMonth,
                 'package' => 2,
                 'join_date' => $today,
-                'status' => 'active',
+                'status' => 'inactive',
                 'notes' => 'Pelanggan paket premium.',
             ],
             [
@@ -59,7 +59,7 @@ class DummyCustomerSeeder extends Seeder
                 'group' => $currentMonth,
                 'package' => 3,
                 'join_date' => $today,
-                'status' => 'active',
+                'status' => 'inactive',
                 'notes' => 'Upgrade paket bulan ini.',
             ],
             [
@@ -70,7 +70,7 @@ class DummyCustomerSeeder extends Seeder
                 'group' => $currentMonth,
                 'package' => 2,
                 'join_date' => $today,
-                'status' => 'active',
+                'status' => 'inactive',
                 'notes' => 'Pelanggan prioritas.',
             ],
             [
@@ -81,7 +81,7 @@ class DummyCustomerSeeder extends Seeder
                 'group' => $currentMonth,
                 'package' => 1,
                 'join_date' => $today,
-                'status' => 'terminated',
+                'status' => 'inactive',
                 'notes' => 'Langganan dihentikan.',
             ],
             [
@@ -92,7 +92,7 @@ class DummyCustomerSeeder extends Seeder
                 'group' => $currentMonth,
                 'package' => 3,
                 'join_date' => $today,
-                'status' => 'active',
+                'status' => 'inactive',
                 'notes' => 'Langganan baru.',
             ],
             [
@@ -114,7 +114,7 @@ class DummyCustomerSeeder extends Seeder
                 'group' => $currentMonth,
                 'package' => 1,
                 'join_date' => $today,
-                'status' => 'active',
+                'status' => 'inactive',
                 'notes' => 'Pelanggan loyal.',
             ],
             [
@@ -125,7 +125,7 @@ class DummyCustomerSeeder extends Seeder
                 'group' => $currentMonth,
                 'package' => 3,
                 'join_date' => $today,
-                'status' => 'active',
+                'status' => 'inactive',
                 'notes' => 'Langganan baru di bulan ini.',
             ],
         ];

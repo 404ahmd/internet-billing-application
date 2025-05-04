@@ -13,6 +13,10 @@ class Customer extends Model
         'package', 'group', 'join_date', 'status', 'due_date', 'notes'
     ];
 
+    public function getPackage(){
+        return $this->belongsTo(Package::class, 'package');
+    }
+
     // function so that the invoice table can have a foreign key that refers to the customer id
     public function invoices(){
         return $this->hasMany(Invoice::class);

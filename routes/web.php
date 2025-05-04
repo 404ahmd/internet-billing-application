@@ -23,8 +23,8 @@ Route::get('/customer/add/view', [CustomerController::class, 'addCustomerView'])
 Route::post('/customer/store', [CustomerController::class, 'store'])->name('customer.store');
 Route::get('/customer/search', [CustomerController::class, 'search'])->name('customer.search');
 Route::delete('/customer/{id}/destroy', [CustomerController::class, 'destroy'])->name('customer.destroy');
-Route::get('/customer/{id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
-Route::put('/customer/{id}/update', [CustomerController::class, 'update'])->name('customer.update');
+Route::get('/customer/{customer}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+Route::put('/customer/{customer}/update', [CustomerController::class, 'update'])->name('customer.update');
 
 //PACKAGE =======================
 Route::get('/pacakge/view', [PackageController::class, 'index'])->name('package.view');
