@@ -14,7 +14,7 @@ class PackageController extends Controller
         // variable for get all package
         // return the view package table
         $packages = Package::all();
-        return view('package.package-view', compact('packages'));
+        return view('package.package_management', compact('packages'));
     }
 
     // function for store new package to package table

@@ -2,6 +2,8 @@
 <script src="{{asset('assets.dashboard') }}/assets/js/core/jquery.3.2.1.min.js"></script>
 <script src="{{asset('assets.dashboard') }}/assets/js/core/popper.min.js"></script>
 <script src="{{asset('assets.dashboard') }}/assets/js/core/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <!-- jQuery UI -->
 <script src="{{asset('assets.dashboard') }}/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>

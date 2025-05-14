@@ -10,15 +10,9 @@
                     <h4 class="text-section">Pelanggan</h4>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('add.customer.view') }}">
-                        <i class="fas fa-user-plus"></i>
-                        <p>Tambah Pelanggan</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="{{ route('customer.view') }}">
                         <i class="fas fa-address-book"></i>
-                        <p>Daftar Pelanggan</p>
+                        <p>Manajemen Pelanggan</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -36,7 +30,7 @@
                     <h4 class="text-section">Jaringan</h4>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="{{ route('router.view') }}">
                         <i class="fas fa-server"></i>
                         <p>Router</p>
                     </a>

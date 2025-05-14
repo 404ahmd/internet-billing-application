@@ -17,17 +17,12 @@ class CustomerController extends Controller
     {
         $customers = Customer::all();
         $invoices = Invoice::all();
-        return view('customer.list_customer', [
-            'invoices' => $invoices,
-            'customers' => $customers
-        ]);
-    }
-
-    //function for get form add cutomer
-    public function addCustomerview()
-    {
         $packages = Package::all();
-        return view('customer.add_customer', compact('packages'));
+        return view('customer.customer_management', [
+            'invoices' => $invoices,
+            'customers' => $customers,
+            'packages' => $packages
+        ]);
     }
 
     //function for add customer adn send to database
@@ -49,19 +44,11 @@ class CustomerController extends Controller
 
         try {
             Customer::create($validated);
-            return redirect()->back()->with('success', 'data berhasil ditambahkan');
+            return redirect()->route('customer.view')->with('success', 'data berhasil ditambahkan');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'gagal menyimpan data' . $e->getMessage())->withInput();
         }
         //while success, redirect to form and throwing success message
-    }
-
-    //function for get all customer
-    public function get()
-    {
-        $customers = Customer::all();
-        //retun back to table customer view and show all customer data
-        return view('customer.list_customer', compact('customers'));
     }
 
     //function for delete customer by id

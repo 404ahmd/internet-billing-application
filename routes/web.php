@@ -3,7 +3,9 @@
 use App\Http\Controllers\ActivationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DumpController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\MikrotikRoutercontroller;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionsController;
@@ -19,7 +21,6 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'
 
 //CUSTOMER =======================
 Route::get('/customer/view', [CustomerController::class, 'index'])->name('customer.view');
-Route::get('/customer/add/view', [CustomerController::class, 'addCustomerView'])->name('add.customer.view');
 Route::post('/customer/store', [CustomerController::class, 'store'])->name('customer.store');
 Route::get('/customer/search', [CustomerController::class, 'search'])->name('customer.search');
 Route::delete('/customer/{id}/destroy', [CustomerController::class, 'destroy'])->name('customer.destroy');
@@ -46,3 +47,14 @@ Route::get('/invoices/search', [InvoiceController::class, 'search'])->name('invo
 //TRANSACTION =======================
 Route::get('/transaction/view', [TransactionsController::class, 'index'])->name('transaction.view');
 Route::get('/transaction/search', [TransactionsController::class, 'search'])->name('transaction.search');
+
+
+//ROUTER =======================
+Route::get('/router/view', [MikrotikRoutercontroller::class, 'index'])->name('router.view');
+Route::post('/router/store', [MikrotikRoutercontroller::class, 'store'])->name('router.store');
+Route::delete('/router/{id}/destroy', [MikrotikRoutercontroller::class, 'destroy'])->name('router.destroy');
+// Route::get('/router/{id}/connect', [MikrotikRoutercontroller::class, 'connect'])->name('router.connect');
+
+//DUMP =======================
+Route::get('/dump/info/router', [DumpController::class, 'getMikrotikInfo'])->name('dump.info.touter');
+
