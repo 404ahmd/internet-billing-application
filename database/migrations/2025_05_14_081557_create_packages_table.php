@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->decimal('price', 10, 2);
+            $table->enum('cycle', ['daily', 'weekly', 'monthly', 'yearly'])->default('monthly');
+            $table->enum('type', ['pppoe', 'hotspot'])->default('pppoe');
+            $table->string('bandwidth')->nullable();
+            $table->enum('status', ['available', 'unavailable'])->default('available');
+
             $table->timestamps();
         });
     }
